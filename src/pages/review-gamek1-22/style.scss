@@ -1,0 +1,265 @@
+@import '../../css/helpers/functions';
+@import '../../css/helpers/mixins';
+@import '../../css/base/flexbox';
+@function _rem($num) {
+   @return $num/192 * 1rem;
+}
+
+body {
+	text-align: center;
+	background-color: #000;
+}
+.page-loading{
+	position: absolute;
+	top:0px;
+	bottom:0px;
+	right:0px;
+	left:0px;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+.spinner {
+  width: 60px;
+  height: 60px;
+  background-color: #67CF22;
+  margin: 100px auto;
+  -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+  animation: rotateplane 1.2s infinite ease-in-out;
+}
+
+@keyframes rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+  } 50% {
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+  } 100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
+
+.review-game {
+	display: inline-block;
+	vertical-align: top;
+    max-width: 100%;
+	height: 100%;
+	overflow: hidden;
+    position: relative;
+}
+
+.review-game__bg {
+    width: auto;
+    height: 100%;
+}
+
+.review-game__inner {
+	display: table;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.camera-wrap{
+	 position: absolute;
+	 right: 0;
+	bottom:_rem(42);
+	height:28.1%;
+	width: 34.1%;
+}
+.camera{
+  position: absolute;
+	width: 28%;
+	right: 6.19%;
+	bottom:3.88%;
+	img{
+		width:100%;
+	}
+}
+.tap{
+	position: absolute;
+    right: 18%;
+    /* top: 73%; */
+    bottom: 12%;
+    background-color: transparent;
+    width: 29%;
+    height: 30%;
+    z-index: 5;
+	
+}
+.hand{
+	position: absolute;
+	right: 0;
+	bottom:19%;
+	width: 15.8%;
+	height: 9.27%;
+	img{
+		width: 100%;
+	}
+}
+.handanimate{
+		animation: myfirst 2s ease-out infinite;
+}
+.small-animate{
+		animation: smallpic 5s;
+}
+.small-animate2{
+	animation: smallpic2 5s;
+}
+.bigPic{
+	position: absolute;
+	left:10.7%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	width:48.4%;
+	img{
+		width:100%;
+	}
+}
+
+
+@keyframes myfirst
+{
+0%   { 	right: -15.8%;opacity: 0}
+// 25%  {background: yellow; left:200px; top:0px;}
+// 50%  {background: blue; left:200px; top:200px;}
+// 75%  {background: green; left:0px; top:200px;}
+100% {right: 0;opacity: 1}
+}
+@keyframes smallpic
+{
+0%   { 		bottom:7%;}
+50%{
+	bottom:45.9%
+}
+75%{
+	bottom:45.9%
+}
+100% {bottom:45.9%;}
+}
+@keyframes smallpic2
+{
+0%   { bottom:8%;}
+50%{
+	bottom:49.8%
+}
+75%{
+	bottom:49.8%
+}
+100% {bottom:49.8%;}
+}
+@keyframes smallpichenping
+{
+0%   { 		bottom:20.4%;;}
+75%{
+	bottom:45.9%
+}
+
+100% {bottom:45.9%;}
+}
+
+
+.review-game__title {
+  display: table-row;
+  font-size: 30%;
+  color: #fff;
+  text-align: center;
+  line-height: _rem(210);
+}
+
+.review-game__list {
+	display: table-row;
+	&::before {
+		@include inline-middle;
+	}
+}
+
+.review-game__list--inner {
+	display: inline-block;
+	vertical-align: middle;
+	@include font-size-0;
+}
+
+.review-game__item {
+	display: inline-block;
+	vertical-align: top;
+	width: 22%;
+  padding: 0 _rem(12);
+
+  img {
+		width: 100%;
+  }
+}
+
+.review-game__view {
+  display: none;
+	// width: _rem(1920);
+	width: 100%;
+	height: 100%;
+  position: absolute;
+  top: 0;
+	left: 0;
+}
+
+@media screen and (orientation:portrait) {
+	.review-game__hint {
+		width: _rem(1404);
+		height: _rem(1072);
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}	
+	.camera {
+    position: absolute;
+    width: 28%;
+    right: 6.19%;
+    bottom: 20.4%;
+	}
+	.small-animate{
+		animation: smallpichenping 3s;
+}
+	
+}
+
+#view1 {
+	background: url('./004.png') center no-repeat #bada5f;
+	background-size: auto 40%;
+}
+#view2 {
+	background: url('./003.png') center no-repeat;
+	background-size: auto 40%;
+	background-color: #54c5ff;
+}
+#view3 {
+	background: url('./002.png') center no-repeat;
+	background-size: auto 40%;
+	background-color: #ff8ab6;
+}
+#view4 {
+	background: url('./001.png') center no-repeat;
+	background-size: auto 40%;
+	background-color: #ffd34e;
+}
+
+.review-game__footer {
+  display: table-row;
+  height: _rem(210);
+}
+
+.bounceIn {
+  display: block;
+}
+
+.audio {
+  width: 0;
+  height: 0;
+}

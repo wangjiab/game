@@ -1,0 +1,30 @@
+{
+  "name": "closet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fileServer.js",
+  "scripts": {
+    "start": "concurrently --kill-others \"node ./fileServer.js ./\" \"gulp dev\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^7.1.4",
+    "browser-sync": "^2.18.13",
+    "concurrently": "^3.5.0",
+    "cssnano": "^3.10.0",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-imagemin": "^3.3.0",
+    "gulp-newer": "^1.3.0",
+    "gulp-postcss": "^7.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sequence": "^0.4.6",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "node-sass": "^4.5.3",
+    "path": "^0.12.7"
+  }
+}

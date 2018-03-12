@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Review Game</title>
+    <script src="../../js/responsive.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+    <link href="../../css/common.css" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
+    <link href="./animate.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="page-loading">
+        <div class="spinner"></div>
+    </div>
+    <div class="review-game" style="display:none">
+        <img class="review-game__bg" src="./background.png" />
+        <div class="review-game__inner">
+            <div class="bigPic" style="display:none">
+                <img>
+            </div>
+            <div class="camera" id="smallpic">
+                <img class="hiddenSponse">
+            </div>
+            <div class="camera" id="opencamera">
+                <img src="./camara.png">
+                <div class="tap">
+                </div>
+            </div>
+            <div class="hand handanimate">
+                <img src="./hand.png">
+            </div>
+        </div>
+        <img class="review-game__hint" src="./hint.png" alt="横屏体验效果更佳" />
+    </div>
+    <div id="audio-box">
+        <audio class="audio" id="bg-audio" src="./cameraMusic.mp3"></audio>
+        <audio id="fontaudio"></audio>
+    </div>
+</body>
+<script>
+    var userAgent = navigator.userAgent;
+    var response = false;
+    if ((userAgent.indexOf('Android') > -1 || userAgent.indexOf('Linux') > -1) || userAgent.indexOf('iPhone') > -1 || userAgent.indexOf('Win') > -1) {
+        response = true
+    }
+    var chars = ['angry', 'happy', 'sad']
+    var charscopy = []
+    var sources = ['background.png'];
+    for (var i = 0; i < chars.length; i++) {
+        // $("#audio-box").append("<audio   preload='auto' id='" + chars[i] + "' src='./" + chars[i] + ".mp3'></audio>")
+        var a = "./" + chars[i] + 1 + ".png";
+        var b = "./" + chars[i] + 2 + ".png";
+        sources.push(a)
+        sources.push(b)
+    }
+    window.onload = function () {
+        loadImages(sources, function () {
+            setTimeout(function () {
+                $(".review-game").fadeIn();
+                $(".page-loading").hide();
+                animate();
+            }, 800)
+        })
+
+    }
+    function animate() {
+        var flag = true;
+        $(".tap").click(function () {
+            if (flag) {
+                flag = false;
+                if (document.getElementById('bg-audio').paused) {
+                    document.getElementById('bg-audio').play();
+                }
+
+                $(".bigPic").fadeOut();
+                if (charscopy.length == 0) {
+                    charscopy = ['angry', 'happy', 'sad']
+                }
+                var maxPos = charscopy.length;
+                var pwd = '';
+                pwd = charscopy[Math.floor(Math.random() * maxPos)]
+                if (charscopy.length > 0) {
+                    for (var i = 0; i < charscopy.length; i++) {
+                        if (pwd == charscopy[i]) {
+                            charscopy.splice(i, 1);
+                        }
+                    }
+                }
+                $("#fontaudio").attr("src", "./" + pwd + ".mp3")
+                $("#smallpic img").attr("src", "./" + pwd + "1.png")
+                $(".hand").removeClass("handanimate")
+                // || pwd == "puppy"注销掉
+                if (pwd == 'horse' || pwd == "mouth" || pwd == "lamb" || pwd == "owl" || pwd == "eyes") {
+                    $("#smallpic").addClass("small-animate2")
+                } else {
+                    $("#smallpic").addClass("small-animate")
+                }
+                $("#smallpic").show();
+                setTimeout(function () {
+                    document.getElementById("fontaudio").load();
+                    if (document.getElementById("fontaudio").paused) {
+                        document.getElementById("fontaudio").play();
+                    }
+                }, 950)
+
+                setTimeout(function () {
+                    $("#smallpic").css("display", "none");
+                    $(".bigPic img").attr("src", "./" + pwd + "2.png")
+                    $(".bigPic").show();
+                    setTimeout(function () {
+                        document.getElementById("fontaudio").load();
+                        if (document.getElementById("fontaudio").paused) {
+                            document.getElementById("fontaudio").play();
+                        }
+                        setTimeout(function () {
+                            flag = true;
+                        }, 500)
+                    }, 950)
+                    $(".bigPic").addClass("animated slideInUp");
+                    if (pwd == 'horse' || pwd == "mouth" || pwd == "lamb" || pwd == "owl" || pwd == "eyes") {
+                        $("#smallpic").removeClass("small-animate2")
+                    } else {
+                        $("#smallpic").removeClass("small-animate")
+                    }
+                }, 2500);
+            }
+        })
+    }
+    function loadImages(sources, callback) {
+        var count = 0,
+            images = {},
+            imgNum = 0;
+        for (src in sources) {
+            imgNum++;
+        }
+        for (src in sources) {
+            images[src] = new Image();
+            images[src].onload = function () {
+                if (++count >= imgNum) {
+                    callback(images);
+                }
+            }
+            images[src].src = sources[src];
+        }
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,23 @@
+@mixin text-overflow {
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+}
+
+@mixin clear-float{
+  display:table;
+  content:"";
+  clear:both;
+}
+
+@mixin font-size-0{
+  font-size: 0 !important;
+  -webkit-text-size-adjust:none;
+}
+
+@mixin inline-middle{
+    content:"";
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+}

@@ -1,0 +1,7 @@
+@function rem($num){
+  @return $num/37.5 * 1rem;
+}
+
+@function em($num, $size){
+  @return $num/$size * 1em;
+}
